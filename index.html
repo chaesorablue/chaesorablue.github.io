@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<title>Jo프로의 일상</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 포항 제철소의 쇳물빛 한 줄 + 강철 회청색 바탕. 왼쪽 정렬 소개 → 채널 → 필터되는 최신 글 목록 */
+:root{
+  --bg:#eef1f4; --surface:#ffffff; --ink:#15212c; --muted:#5b6b7a; --line:#d3dae1;
+  --molten:#d9531a; --molten-soft:#fbe6dc; --steel:#2f4a63; --up:#d02b3c; --down:#2563c9;
+  --f-display:"Black Han Sans","Noto Sans KR",system-ui,sans-serif;
+  --f-body:"Noto Sans KR",system-ui,-apple-system,"Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f161d; --surface:#17212b; --ink:#e6ecf1; --muted:#93a3b2; --line:#26333f;
+  --molten:#ff7a3d; --molten-soft:#3a2116; --steel:#9cb8d1; --up:#ff6b78; --down:#6ea4ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f161d; --surface:#17212b; --ink:#e6ecf1; --muted:#93a3b2; --line:#26333f;
+  --molten:#ff7a3d; --molten-soft:#3a2116; --steel:#9cb8d1; --up:#ff6b78; --down:#6ea4ff; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:960px;margin:0 auto;padding-block:40px 56px;display:flex;flex-direction:column;gap:56px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--molten);outline-offset:3px;border-radius:6px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr;gap:20px}
+.pour{height:6px;width:120px;background:linear-gradient(90deg,var(--molten),#f2a23a);border-radius:3px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,9vw,84px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--molten)}
+.lede{font-size:clamp(16px,2.2vw,19px);max-width:36em;margin:0;color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.facts li{font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--surface)}
+
+h2{font-family:var(--f-display);font-weight:400;font-size:28px;margin:0 0 6px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 20px;font-size:14px}
+
+/* channels */
+.channels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.channels{grid-template-columns:1fr}}
+.ch-latest{font-size:13px;color:var(--ink);border-left:3px solid var(--molten);padding-left:8px;margin-top:2px}
+.ch-latest:empty{display:none}
+.ad{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:12px;padding:12px 16px;border:1px dashed var(--line);border-radius:10px;text-decoration:none;font-size:14px;color:var(--muted)}
+.ad b{color:var(--ink);margin-right:6px}
+.ad:hover{border-color:var(--molten)}
+.ad .ch-go{margin-left:auto}
+
+/* crypto */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:720px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile .s{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.tile .p{font-family:var(--f-mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tile .k{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chg{font-family:var(--f-mono);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .down{color:var(--down)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-size:13px;color:var(--muted)}
+.meta b{color:var(--molten);font-family:var(--f-mono);font-weight:500}
+.cols{display:grid;grid-template-columns:3fr 2fr;gap:28px;margin-top:28px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
+.cols h3{font-size:15px;margin:0 0 8px}
+.nl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.nl li{border-bottom:1px solid var(--line)}
+.nl a{display:block;padding:10px 2px;text-decoration:none;min-width:0}
+.nl a:hover .nt{color:var(--molten)}
+.nt{font-size:14px;font-weight:500;overflow-wrap:anywhere}
+.ns{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:2px}
+.empty{padding:12px 2px;color:var(--muted);font-size:14px}
+.ch{display:flex;flex-direction:column;gap:6px;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-decoration:none;transition:border-color .15s,transform .15s}
+.ch:hover{border-color:var(--molten);transform:translateY(-2px)}
+.ch.main{grid-column:1/-1;background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ch.main .ch-handle,.ch.main .ch-desc{color:color-mix(in srgb,var(--bg) 75%,transparent)}
+.ch-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ch-name{font-weight:700;font-size:17px}
+.ch-tag{font-family:var(--f-mono);font-size:11px;color:var(--molten);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.ch-handle{font-family:var(--f-mono);font-size:13px;color:var(--steel)}
+.ch-desc{font-size:14px;color:var(--muted);margin:0}
+.ch-go{margin-top:auto;font-size:13px;font-weight:500;color:var(--molten)}
+.disclose{font-size:12px;color:var(--muted);margin:10px 0 0}
+
+/* posts */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.filters button{font:500 14px var(--f-body);padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--molten);border-color:var(--molten);color:#fff}
+.filters .n{font-family:var(--f-mono);font-size:12px;opacity:.75;margin-left:4px}
+.posts{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.posts li{border-bottom:1px solid var(--line)}
+.posts a{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:14px 4px;text-decoration:none;align-items:baseline}
+.posts a:hover .pt{color:var(--molten)}
+.pd{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pt{font-size:15px;font-weight:500;min-width:0;overflow-wrap:anywhere}
+.pc{display:inline-block;font-size:11px;font-weight:700;color:var(--molten);background:var(--molten-soft);padding:1px 7px;border-radius:4px;margin-right:8px;vertical-align:2px}
+.more{display:inline-block;margin-top:16px;font-weight:500;color:var(--molten)}
+
+/* topics */
+.topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.topic h3{font-size:16px;margin:0 0 4px}
+.topic p{margin:0;font-size:14px;color:var(--muted)}
+.topic .k{font-family:var(--f-mono);font-size:12px;color:var(--molten)}
+
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+@media (max-width:520px){.posts a{grid-template-columns:1fr;gap:2px}}
+@media (prefers-reduced-motion:reduce){.ch{transition:none}.ch:hover{transform:none}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="pour" aria-hidden="true"></div>
+    <div class="eyebrow">Pohang · 경제 · 시사 · AI 영상</div>
+    <h1>Jo프로의 <em>일상</em></h1>
+    <p class="lede">포항에서 경제, 정치, 생활 정보를 씁니다. 뉴스는 숫자로 정리하고, 바뀌는 제도는 "나한테 얼마가 오나"로 풀어 드립니다. 요즘은 AI로 영상도 직접 만들고 있어요.</p>
+    <ul class="facts">
+      <li>매일 새 글</li>
+      <li>15년 차 트레이더</li>
+      <li>해병대 · 포스코와 인연</li>
+      <li>서로이웃 환영</li>
+    </ul>
+  </header>
+
+  <section aria-labelledby="ch-h">
+    <h2 id="ch-h">어디서 만날 수 있나요</h2>
+    <p class="sub">채널마다 다른 이야기를 합니다.</p>
+    <div class="channels">
+      <a class="ch main" href="https://blog.naver.com/jjun0306" target="_blank" rel="noopener">
+        <div class="ch-top"><span class="ch-name">네이버 블로그 · Jo프로의 일상</span><span class="ch-tag">메인</span></div>
+        <span class="ch-handle">blog.naver.com/jjun0306</span>
+        <p class="ch-desc">경제·투자, 생활 제도 총정리, 시사 이슈, AI 영상 후기. 하루 여러 편 올라옵니다.</p>
+        <span class="ch-go">블로그 가기 →</span>
+      </a>
+      <a class="ch" href="https://x.com/sorablue19" target="_blank" rel="noopener">
+        <div class="ch-top"><span class="ch-name">X</span><span class="ch-tag">한 줄 생각</span></div>
+        <span class="ch-handle">@sorablue19</span>
+        <p class="ch-desc">짧고 센 한 줄, 생활 토론 ①②③, 코인 장세 이야기.</p>
+        <span class="ch-go">X 가기 →</span>
+      </a>
+      <a class="ch" href="https://www.threads.com/@chae___jb" target="_blank" rel="noopener">
+        <div class="ch-top"><span class="ch-name">스레드 · 미래폐허통신</span><span class="ch-tag">그때 vs 미래</span></div>
+        <span class="ch-handle">@chae___jb</span>
+        <p class="ch-desc">1980년대 그 시절과 폐허가 된 미래를 나란히. 진짜 통계 카드와 함께.</p>
+        <span class="ch-go">스레드 가기 →</span>
+      </a>
+      <a class="ch" href="https://www.instagram.com/iamrichai/" target="_blank" rel="noopener">
+        <div class="ch-top"><span class="ch-name">인스타그램 · 그 시절 사랑방</span><span class="ch-tag">5060</span></div>
+        <span class="ch-handle">@iamrichai</span>
+        <p class="ch-desc">파크골프 소식과 만화 릴스, 그 시절 추억. 큰 글씨 카드뉴스.</p>
+        <span class="ch-go">인스타 가기 →</span>
+      </a>
+      <a class="ch" href="https://jbthinkingworld.blogspot.com" target="_blank" rel="noopener">
+        <div class="ch-top"><span class="ch-name">MOTION LAB</span><span class="ch-tag">기업 가상광고</span></div>
+        <span class="ch-handle">jbthinkingworld.blogspot.com</span>
+        <p class="ch-desc">포스코·삼성전자·HMM 같은 기업을 주제로 코드로 직접 그린 40초 모션그래픽 가상광고.</p>
+        <span class="ch-latest" id="ml-latest"></span>
+        <span class="ch-go">MOTION LAB 가기 →</span>
+      </a>
+    </div>
+    <a class="ad" href="https://higgsfield.ai?fpr=junbyoung-cf39f6" target="_blank" rel="noopener sponsored">
+      <span class="ch-tag">#광고</span>
+      <span><b>AI 영상 만들기 · Higgsfield</b> 블로그의 100% AI 영상은 이 도구로 만듭니다.</span>
+      <span class="ch-go">써 보기 →</span>
+    </a>
+    <p class="disclose">위 링크는 제휴 링크입니다. 가입·구매 시 수수료를 받을 수 있습니다.</p>
+  </section>
+
+  <section aria-labelledby="po-h">
+    <h2 id="po-h">최근 블로그 글</h2>
+    <p class="sub" id="po-sub">최근 글 <span id="po-total"></span>편. 주제를 눌러 골라 보세요.</p>
+    <div class="filters" id="filters" role="group" aria-label="주제 고르기"></div>
+    <ul class="posts" id="posts"></ul>
+    <a class="more" href="https://blog.naver.com/jjun0306" target="_blank" rel="noopener">전체 글은 블로그에서 →</a>
+  </section>
+
+  <section aria-labelledby="cr-h">
+    <h2 id="cr-h">크립토 브리핑</h2>
+    <p class="sub" id="csub">갱신할 때 찍어 둔 시세와 최근 코인 뉴스입니다. 실시간 시세가 아니에요.</p>
+    <div class="tiles" id="tiles"></div>
+    <div class="meta" id="cmeta"></div>
+    <div class="cols">
+      <div>
+        <h3>최근 코인 뉴스</h3>
+        <ul class="nl" id="cnews"></ul>
+      </div>
+      <div>
+        <h3>Jo프로의 코인 글</h3>
+        <ul class="nl" id="cmine"></ul>
+      </div>
+    </div>
+    <a class="more" href="https://chaesorablue.github.io/live-prices/" target="_blank" rel="noopener">실시간 시세 창 따로 열기 →</a>
+    <p class="disclose">금은 XAUT(테더 골드, 실물 금 1온스 연동 토큰) 시세입니다. 시세는 바이낸스·업비트 공개 시세, 뉴스는 블록미디어·토큰포스트 기사 제목입니다. 투자 권유가 아닙니다.</p>
+  </section>
+
+  <section aria-labelledby="tp-h">
+    <h2 id="tp-h">주로 쓰는 것</h2>
+    <p class="sub">블로그 글은 네 갈래로 나뉩니다.</p>
+    <div class="topics">
+      <div class="topic"><span class="k">찾아보는 정보</span><h3>바뀌는 제도 총정리</h3><p>연금, 세금, 공시가격, 청약처럼 날짜와 금액이 걸린 이야기를 체크리스트로.</p></div>
+      <div class="topic"><span class="k">경제·투자</span><h3>시장이 움직인 날</h3><p>코스피, 미국 주식, 비트코인. 숫자가 왜 움직였는지 짚습니다.</p></div>
+      <div class="topic"><span class="k">시사</span><h3>상식으로 보는 뉴스</h3><p>예산, 인사, 법안 논란. 출처를 밝히고 쓴소리를 합니다.</p></div>
+      <div class="topic"><span class="k">AI·영상</span><h3>직접 만든 AI 영상</h3><p>AI 변신·동물 반전 영상 후기와 MOTION LAB 기업 가상광고.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© Jo프로 · 포항</span>
+    <span>글 목록 갱신 <span id="updated"></span></span>
+  </footer>
+</div>
+
+<script>
+const DATA = {"updated": "2026.11.22", "posts": [{"d": "2026.11.22", "t": "[MOTION LAB 가상광고 #10] 삼성전자 ― 작은 칩 위에 세운 도시 (41초 아이소메트릭 미니어처 모션그래픽)", "u": "https://blog.naver.com/jjun0306/224487016608", "k": "AI·영상"}, {"d": "2026.11.22", "t": "[MOTION LAB 가상광고 #9] HMM ― 바다를 잇는 50년 (41초 종이 오려붙이기 모션그래픽)", "u": "https://blog.naver.com/jjun0306/224487015591", "k": "AI·영상"}, {"d": "2026.11.22", "t": "\"상속세 0원?\" 젠슨 황, GRAT 신탁으로 14조 대물림…한국이라면?", "u": "https://blog.naver.com/jjun0306/224486831088", "k": "시사"}, {"d": "2026.11.22", "t": "전세보증금 원상복구 공제 기준, 장판·벽지·못자국 어디까지? 총정리", "u": "https://blog.naver.com/jjun0306/224486785845", "k": "찾아보는 정보"}, {"d": "2026.11.22", "t": "공매도 금지 청원 1만명 돌파, 한국도 막을까? 대만 23일 조치 총정리", "u": "https://blog.naver.com/jjun0306/224486754150", "k": "찾아보는 정보"}, {"d": "2026.11.22", "t": "희망퇴직 기업 2026, 하이트진로 36개월·롯데 위로금 얼마? 총정리", "u": "https://blog.naver.com/jjun0306/224486693554", "k": "찾아보는 정보"}, {"d": "2026.11.21", "t": "공시가격 현실화율 69% 동결, 내년 보유세 얼마? 반포자이 46%↑ 단지별 총정리", "u": "https://blog.naver.com/jjun0306/224486295857", "k": "찾아보는 정보"}, {"d": "2026.11.21", "t": "국민연금 감액 기준 월 519만원? 연기연금 7.2% 더 받는 법·노후소득 벽 총정리", "u": "https://blog.naver.com/jjun0306/224485958110", "k": "찾아보는 정보"}, {"d": "2026.11.21", "t": "⚖ \"뉘우치면 유공자?\" 민주유공자법 본회의 통과, 635명 예우 기준 논란", "u": "https://blog.naver.com/jjun0306/224485917215", "k": "시사"}, {"d": "2026.11.21", "t": "5년간 알트코인 전멸 실화?! \"역시 이더리움(ETH)이 짱이었다\"", "u": "https://blog.naver.com/jjun0306/224485674018", "k": "경제·투자"}, {"d": "2026.11.21", "t": "재초환 부담금 얼마? 한강맨션 7.2억·은마 4.6억, 12월 30일 첫 부과 총정리", "u": "https://blog.naver.com/jjun0306/224485669234", "k": "찾아보는 정보"}, {"d": "2026.11.21", "t": "점점 무서워지는 AI, 손 한 번 쓸어내리면 성별이 바뀐다? 100% AI 변신 영상", "u": "https://blog.naver.com/jjun0306/224485633850", "k": "시사"}, {"d": "2026.11.21", "t": "\"9000피 꿈은 어디로?\" 검은 금요일 코스피 4869, 비트코인 6만 달러 붕괴", "u": "https://blog.naver.com/jjun0306/224485633603", "k": "경제·투자"}, {"d": "2026.11.20", "t": "\"반포 분양권 42억\"? 靑 비서관 재산 75억, 11월 고위공직자 재산공개 1위", "u": "https://blog.naver.com/jjun0306/224484817607", "k": "시사"}, {"d": "2026.11.20", "t": "KFC 배달비 12월 1일부터 2000원, 무료배달 끝? 버거 4사 비교 총정리", "u": "https://blog.naver.com/jjun0306/224484597061", "k": "찾아보는 정보"}, {"d": "2026.11.20", "t": "⚖ \"역사적 반역\" vs \"의회 쿠데타\"? 與 조희대 대법원장 탄핵 추진, 41년 만", "u": "https://blog.naver.com/jjun0306/224484376285", "k": "시사"}, {"d": "2026.11.19", "t": "하드웨어 지갑 구매 체크리스트 7가지, 콜드월렛 종류·보관법 총정리", "u": "https://blog.naver.com/jjun0306/224483991646", "k": "찾아보는 정보"}, {"d": "2026.11.19", "t": "\"쪽지 예산 70억 건의합니다\"? 상임위서 28.5조 불어난 내년 예산 논란", "u": "https://blog.naver.com/jjun0306/224483991428", "k": "시사"}, {"d": "2026.11.19", "t": "코인 과세 250만원 공제 유지, 2029년부터 22%? 손실이월공제 총정리", "u": "https://blog.naver.com/jjun0306/224483572132", "k": "찾아보는 정보"}, {"d": "2026.11.19", "t": "AI 영화 만들기 후기, 카메라·배우 없이 형사 추격신 2컷 뽑아봤습니다", "u": "https://blog.naver.com/jjun0306/224483352503", "k": "시사"}, {"d": "2026.11.19", "t": "미국 금리인상 12월 9일 유력? 빅스텝 확률·주담대 6% 영향 총정리", "u": "https://blog.naver.com/jjun0306/224483296153", "k": "찾아보는 정보"}, {"d": "2026.11.19", "t": "수족관 인어 쇼에 고양이를 넣었더니? 물방울 하트에 생선 사냥까지, 100% AI 영상", "u": "https://blog.naver.com/jjun0306/224482956397", "k": "시사"}, {"d": "2026.11.19", "t": "한한령 해제 언제부터? 한중 FTA 타결로 여행·게임·매장 달라지는 것 총정리 ✈", "u": "https://blog.naver.com/jjun0306/224482952716", "k": "찾아보는 정보"}, {"d": "2026.11.19", "t": "\"젠슨 황 없어도 155조?\" 엔비디아 깜짝 실적에 코스피 5000 하루 만에 복귀", "u": "https://blog.naver.com/jjun0306/224482939067", "k": "경제·투자"}, {"d": "2026.11.18", "t": "\"공직 전 일시적 다주택\"? 이용철 법무장관 후보 재산 39억·3주택 해명 논란", "u": "https://blog.naver.com/jjun0306/224482274974", "k": "시사"}, {"d": "2026.11.18", "t": "\"9000피 축포는 어디로?\" 코스피 5000 붕괴, 젠슨 황 쇼크에 삼전닉스 목표가 줄하향", "u": "https://blog.naver.com/jjun0306/224481806547", "k": "경제·투자"}, {"d": "2026.11.18", "t": "수능 재난문자 시험 중 울린다? 1억 포상금·시간 연장 대책 총정리", "u": "https://blog.naver.com/jjun0306/224481751615", "k": "찾아보는 정보"}, {"d": "2026.11.18", "t": "앤트로픽 상장일 11월 19일, 공모가 70~78달러? 기업가치 1.4조 달러 총정리", "u": "https://blog.naver.com/jjun0306/224481580177", "k": "찾아보는 정보"}, {"d": "2026.11.17", "t": "[MOTION LAB 가상광고 #8] 현대자동차 ― 점 하나가 미래로 달리기까지 (41초 점·선·면 모션그래픽)", "u": "https://blog.naver.com/jjun0306/224481221140", "k": "AI·영상"}, {"d": "2026.11.17", "t": "세무사 시험 AI 부정행위부터 수능 '단추 스티커'까지! 진화하는 첨단 커닝 수법 총정리", "u": "https://blog.naver.com/jjun0306/224481115303", "k": "찾아보는 정보"}, {"d": "2026.11.17", "t": "코인원 개인정보 유출, 내 정보도? 주민번호·계좌 확인·대처법 총정리", "u": "https://blog.naver.com/jjun0306/224481111428", "k": "찾아보는 정보"}, {"d": "2026.11.17", "t": "⚖ \"탈옥의 외주화?\" 순방 중 국무회의 오른 조작기소 특검법, 309명·200일 쟁점", "u": "https://blog.naver.com/jjun0306/224480850462", "k": "시사"}, {"d": "2026.11.17", "t": "코인 개인지갑 출금, 소유자 확인 의무화? 특금법 개정안·과태료 1억 총정리", "u": "https://blog.naver.com/jjun0306/224480388197", "k": "찾아보는 정보"}, {"d": "2026.11.17", "t": "\"악법도 법이라 통지했다\" 반포현대 1인당 2.2억 재초환, 국토부는 \"폐지 검토 안 해\"", "u": "https://blog.naver.com/jjun0306/224480251313", "k": "시사"}, {"d": "2026.11.17", "t": "한국은행 미국 주식 ETF, 뭘 샀나? S&P500 2종·금 ETF 40% 늘린 13F 총정리", "u": "https://blog.naver.com/jjun0306/224480214093", "k": "찾아보는 정보"}, {"d": "2026.11.17", "t": "수능 와이파이 차단, 전파는 안 끊는다? 19일 AI 커닝 대책 총정리", "u": "https://blog.naver.com/jjun0306/224480098053", "k": "찾아보는 정보"}, {"d": "2026.11.16", "t": "부모 집 무상거주 증여세, 13억 넘으면 낸다? 계산법·5년 기준 총정리", "u": "https://blog.naver.com/jjun0306/224478978223", "k": "찾아보는 정보"}, {"d": "2026.11.16", "t": "\"등 뒤에서 날아오는 화살?\" 최민희 윤리심판원行, 친명·친청 내전 격화", "u": "https://blog.naver.com/jjun0306/224478953742", "k": "시사"}, {"d": "2026.11.16", "t": "수능 준비물 체크리스트 2027, 반입금지 물품·스마트안경 규정 총정리 ✏", "u": "https://blog.naver.com/jjun0306/224478904090", "k": "찾아보는 정보"}, {"d": "2026.11.16", "t": "\"397.5점 수석이 AI였다?\" 세무사 부정행위 자수, 국가자격시험 전수조사", "u": "https://blog.naver.com/jjun0306/224478648355", "k": "시사"}, {"d": "2026.11.15", "t": "이재용 증여세 1조5800억, 어떻게 계산했나? 할증 20%·세율 50% 총정리", "u": "https://blog.naver.com/jjun0306/224478101102", "k": "찾아보는 정보"}, {"d": "2026.11.15", "t": "\"빚부터 갚자 vs 재정 저수지\" 162조 미래대응기금, 국회 예산 전쟁 돌입", "u": "https://blog.naver.com/jjun0306/224477935215", "k": "시사"}, {"d": "2026.11.15", "t": "노란우산 개인정보 유출, 내 정보도? 192만 가입자 확인 방법·대처 총정리", "u": "https://blog.naver.com/jjun0306/224477832894", "k": "찾아보는 정보"}, {"d": "2026.11.15", "t": "연말정산 미리보기 체크리스트 2026, 12월 전에 꼭 챙길 7가지 총정리", "u": "https://blog.naver.com/jjun0306/224477810768", "k": "찾아보는 정보"}, {"d": "2026.11.15", "t": "\"결혼한 장남이 미혼 부양가족?\" 이혜훈 80억 원펜타스 몰수보전 신청", "u": "https://blog.naver.com/jjun0306/224477696087", "k": "시사"}, {"d": "2026.11.14", "t": "배우 고경표 음주운전 사고에 뜬금없는 '이재명 대통령' 소환? 황당한 갤러리 공식 입장문 논란 정리!", "u": "https://blog.naver.com/jjun0306/224477123419", "k": "시사"}, {"d": "2026.11.14", "t": "비트코인 반등은 시간문제? 250억 달러 숏 청산 물량이 쌓였다! (CryptoCapo 분석)", "u": "https://blog.naver.com/jjun0306/224477102504", "k": "경제·투자"}, {"d": "2026.11.14", "t": "[MOTION LAB 가상광고 #7] 앤트로픽 ― 대화 한 줄에서 나스닥까지 (40초 손그림 스케치북 모션그래픽)", "u": "https://blog.naver.com/jjun0306/224477040354", "k": "AI·영상"}, {"d": "2026.11.14", "t": "[MOTION LAB 가상광고 #6] 엔비디아 ― SYSTEM ERROR: 칩은 한눈팔지 않는다 (40초 레트로 터미널 풍자 영상)", "u": "https://blog.naver.com/jjun0306/224476917941", "k": "AI·영상"}, {"d": "2026.11.14", "t": "[MOTION LAB 가상광고 #5] LG이노텍 ― 보이지 않던 것을 보이게 하는 기술 (40초 렌즈 시점 모션그래픽)", "u": "https://blog.naver.com/jjun0306/224476888628", "k": "AI·영상"}], "crypto": {"prices": {"rows": [{"s": "BTC", "usd": 59036.91, "chg": 5.195, "krw": 80757000.0}, {"s": "XAUT", "usd": 3535.4, "chg": 0.695, "krw": 4835000.0}, {"s": "SOL", "usd": 69.12, "chg": 4.823, "krw": 94450.0}, {"s": "AVAX", "usd": 6.52, "chg": 6.938, "krw": 8920.0}], "kimp": 0.06634663826527998, "fx": 1367.0, "at": "2026.11.22 15:30"}, "news": [{"src": "토큰포스트", "t": "비트코인 200일선 회복 뒤 거래 강화 방침 밝힌 조르디 비서", "u": "https://www.tokenpost.kr/news/cryptocurrency/442432", "d": "11.22 14:54"}, {"src": "토큰포스트", "t": "혼전 테더 이혼 분할, 자금 출처·혼인 후 운용이 쟁점", "u": "https://www.tokenpost.kr/news/cryptocurrency/442431", "d": "11.22 14:48"}, {"src": "토큰포스트", "t": "[크립토 인앤아웃] 비트코인·이더리움 매도세...솔라나는 유입이 유출보다 많아", "u": "https://www.tokenpost.kr/news/cryptocurrency/442429", "d": "11.22 14:30"}, {"src": "토큰포스트", "t": "비트코인 6만1000~6만2000달러, 킬라가 첫 저항으로 봤다", "u": "https://www.tokenpost.kr/news/cryptocurrency/442427", "d": "11.22 14:13"}, {"src": "블록미디어", "t": "비트코인 6만달러 붕괴…하루 11억달러 강제 청산", "u": "https://www.blockmedia.co.kr/archives/1169095", "d": "11.22 12:54"}, {"src": "블록미디어", "t": "중앙은행들 “금고에 둬야 내 자산”…비트코인은 아직 ‘관망’", "u": "https://www.blockmedia.co.kr/archives/1169093", "d": "11.22 12:11"}, {"src": "블록미디어", "t": "월가 강세론자 야데니 “S&P500 약세장 아닌 조정”…변수는 연준", "u": "https://www.blockmedia.co.kr/archives/1169091", "d": "11.22 11:20"}, {"src": "블록미디어", "t": "크라켄, 캐나다달러 시장서 비트코인 ‘헐값’ 체결…”거래 유지”(종합)", "u": "https://www.blockmedia.co.kr/archives/1169088", "d": "11.22 10:35"}], "mine": [{"d": "2026.11.21", "t": "5년간 알트코인 전멸 실화?! \"역시 이더리움(ETH)이 짱이었다\"", "u": "https://blog.naver.com/jjun0306/224485674018", "k": "경제·투자"}, {"d": "2026.11.21", "t": "\"9000피 꿈은 어디로?\" 검은 금요일 코스피 4869, 비트코인 6만 달러 붕괴", "u": "https://blog.naver.com/jjun0306/224485633603", "k": "경제·투자"}, {"d": "2026.11.19", "t": "하드웨어 지갑 구매 체크리스트 7가지, 콜드월렛 종류·보관법 총정리", "u": "https://blog.naver.com/jjun0306/224483991646", "k": "찾아보는 정보"}, {"d": "2026.11.19", "t": "코인 과세 250만원 공제 유지, 2029년부터 22%? 손실이월공제 총정리", "u": "https://blog.naver.com/jjun0306/224483572132", "k": "찾아보는 정보"}]}, "motionlab": {"t": "[MOTION LAB 가상광고 #10] 삼성전자 ― 작은 칩 위에 세운 도시 (41초 아이소메트릭 미니어처 모션그래픽)", "u": "https://jbthinkingworld.blogspot.com/2026/11/motion-lab-10-41.html"}};
+const CATS = ["전체","찾아보는 정보","경제·투자","시사","AI·영상"];
+const SHOW = 14;
+let cur = "전체";
+const $ = id => document.getElementById(id);
+$("updated").textContent = DATA.updated;
+$("po-total").textContent = DATA.posts.length;
+function count(c){return c==="전체"?DATA.posts.length:DATA.posts.filter(p=>p.k===c).length}
+function renderFilters(){
+  $("filters").innerHTML = CATS.filter(c=>count(c)>0).map(c=>
+    `<button type="button" id="f-${CATS.indexOf(c)}" aria-pressed="${c===cur}" data-c="${c}">${c}<span class="n">${count(c)}</span></button>`).join("");
+}
+function esc(s){return s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+function renderPosts(){
+  const list = DATA.posts.filter(p=>cur==="전체"||p.k===cur).slice(0,SHOW);
+  $("posts").innerHTML = list.length ? list.map(p=>
+    `<li><a href="${esc(p.u)}" target="_blank" rel="noopener"><span class="pd">${esc(p.d)}</span><span class="pt"><span class="pc">${esc(p.k)}</span>${esc(p.t)}</span></a></li>`).join("")
+    : `<li style="padding:16px 4px;color:var(--muted)">이 주제의 최근 글이 아직 없어요.</li>`;
+}
+$("filters").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  cur=b.dataset.c; renderFilters(); renderPosts();
+});
+renderFilters(); renderPosts();
+
+if (DATA.motionlab) $("ml-latest").textContent = "최신 · " + DATA.motionlab.t;
+
+(function crypto(){
+  const C = DATA.crypto || {};
+  const P = C.prices;
+  const usd = v => "$" + (v>=100 ? Math.round(v).toLocaleString("en-US") : v.toFixed(2));
+  const krw = v => v==null ? "—" : "₩" + Math.round(v).toLocaleString("ko-KR");
+  const NAMES = {BTC:"비트코인", XAUT:"금", SOL:"솔라나", AVAX:"아발란체", ETH:"이더리움"};
+  function draw(P, liveAt){
+    $("tiles").innerHTML = P.rows.map(r=>{
+      const cls = r.chg>=0 ? "up" : "down", sign = r.chg>=0 ? "▲ +" : "▼ ";
+      return `<div class="tile"><span class="s">${esc(NAMES[r.s]||r.s)} · ${esc(r.s)}</span><span class="p">${usd(r.usd)}</span>`+
+        `<span class="chg ${cls}">${sign}${r.chg.toFixed(2)}% <span style="color:var(--muted);font-weight:400">24h</span></span>`+
+        `<span class="k">${krw(r.krw)}${r.s==="XAUT"&&r.krw?` · 1돈 ${krw(r.krw/31.1035*3.75)}`:""}</span></div>`;
+    }).join("");
+    $("cmeta").innerHTML = (P.kimp!=null ? `<span>BTC 김치 프리미엄 <b>${P.kimp>=0?"+":""}${P.kimp.toFixed(2)}%</b></span>` : "") +
+      (P.fx ? `<span>USDT 원화 <b>${krw(P.fx)}</b></span>` : "") +
+      `<span>${liveAt ? "실시간 · " + esc(liveAt) : esc(P.at) + " 기준"}</span>`;
+  }
+  if (P && P.rows) draw(P);
+  else $("tiles").innerHTML = `<div class="empty">이번 갱신 때 시세를 못 받아 왔어요. 다음 갱신에 다시 채웁니다.</div>`;
+
+  /* 외부 시세를 불러올 수 있는 곳(GitHub 등)에서는 10초마다 실시간으로 바꿈. claude.ai에서는 조용히 실패하고 저장된 시세를 유지 */
+  const SYMS = (P && P.rows ? P.rows.map(r=>r.s) : ["BTC","XAUT","SOL","AVAX"]);
+  async function live(){
+    try{
+      const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+      const q = encodeURIComponent(JSON.stringify(SYMS.map(s=>s+"USDT")));
+      const [bn, up] = await Promise.all([
+        fetch("https://api.binance.com/api/v3/ticker/24hr?symbols="+q, {signal:ctl.signal}).then(r=>r.json()),
+        fetch("https://api.upbit.com/v1/ticker?markets="+[...SYMS.map(s=>"KRW-"+s),"KRW-USDT"].join(","), {signal:ctl.signal}).then(r=>r.json())]);
+      const k = Object.fromEntries(up.map(d=>[d.market.slice(4), d.trade_price]));
+      const rows = SYMS.map(s=>{ const b = bn.find(d=>d.symbol===s+"USDT"); return {s, usd:+b.lastPrice, chg:+b.priceChangePercent, krw:k[s]??null}; });
+      const fx = k.USDT, b0 = rows[0];
+      draw({rows, fx, kimp: b0.krw&&fx ? (b0.krw/(b0.usd*fx)-1)*100 : null},
+           new Date().toLocaleTimeString("ko-KR",{hour12:false}));
+      $("csub").textContent = "시세는 10초마다 바뀌는 실시간이고, 뉴스는 갱신할 때 모은 최근 코인 뉴스입니다.";
+      setTimeout(live, 10000);
+    }catch(e){ /* 저장된 시세 유지 */ }
+  }
+  live();
+  const li = (x, s) => `<li><a href="${esc(x.u)}" target="_blank" rel="noopener"><span class="nt">${esc(x.t)}</span><span class="ns">${esc(s)}</span></a></li>`;
+  $("cnews").innerHTML = (C.news||[]).length ? C.news.map(n=>li(n, n.src+" · "+n.d)).join("") : `<li class="empty">뉴스를 아직 못 받아 왔어요.</li>`;
+  $("cmine").innerHTML = (C.mine||[]).length ? C.mine.map(p=>li(p, "블로그 · "+p.d)).join("") : `<li class="empty">최근 코인 글이 없어요.</li>`;
+})();
+</script>
+
+</body>
+</html>
